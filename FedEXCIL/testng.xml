@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="FedExCILSuite">
+	<test thread-count="5" name="FedExCILOrderCreation">
+		<classes>
+			<class name="fedexCILStaging.FedExCILOrderCreation"></class>
+
+
+		</classes>
+	</test> <!-- NASmoke -->
+</suite> <!-- NASuite -->
