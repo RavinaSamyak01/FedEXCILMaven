@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -46,42 +48,38 @@ public class FedExCILOrderCreation {
 		storage = new Properties();
 		FileInputStream fi = new FileInputStream(".\\src\\main\\resources\\config.properties");
 		storage.load(fi);
+		// --Opening Chrome Browser
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-		// options.addArguments("headless");
-		// options.addArguments("headless");
+		options.addArguments("--headless", "--window-size=1920,1200");
 		options.addArguments("--incognito");
 		options.addArguments("--test-type");
 		options.addArguments("--no-proxy-server");
 		options.addArguments("--proxy-bypass-list=*");
 		options.addArguments("--disable-extensions");
 		options.addArguments("--no-sandbox");
-		options.addArguments("--start-maximized");
-
-		// options.addArguments("--headless");
-		// options.addArguments("window-size=1366x788");
-		capabilities.setPlatform(Platform.ANY);
+		String downloadFilepath = System.getProperty("user.dir") + "\\src\\main\\resources\\Downloads";
+		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+		chromePrefs.put("profile.default_content_settings.popups", 0);
+		chromePrefs.put("download.prompt_for_download", "false");
+		chromePrefs.put("safebrowsing.enabled", "false");
+		chromePrefs.put("download.default_directory", downloadFilepath);
+		options.setExperimentalOption("prefs", chromePrefs);
+		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+		capabilities.setPlatform(Platform.ANY);
 		driver = new ChromeDriver(options);
-		// Default size
-		Dimension currentDimension = driver.manage().window().getSize();
-		int height = currentDimension.getHeight();
-		int width = currentDimension.getWidth();
-		System.out.println("Current height: " + height);
-		System.out.println("Current width: " + width);
-		System.out.println("window size==" + driver.manage().window().getSize());
 
-		// Set new size
-		Dimension newDimension = new Dimension(1366, 788);
-		driver.manage().window().setSize(newDimension);
-
-		// Getting
-		Dimension newSetDimension = driver.manage().window().getSize();
-		int newHeight = newSetDimension.getHeight();
-		int newWidth = newSetDimension.getWidth();
-		System.out.println("Current height: " + newHeight);
-		System.out.println("Current width: " + newWidth);
+		/*
+		 * // Set new size Dimension newDimension = new Dimension(1366, 788);
+		 * driver.manage().window().setSize(newDimension);
+		 * 
+		 * // Getting Dimension newSetDimension = driver.manage().window().getSize();
+		 * int newHeight = newSetDimension.getHeight(); int newWidth =
+		 * newSetDimension.getWidth(); System.out.println("Current height: " +
+		 * newHeight); System.out.println("Current width: " + newWidth);
+		 */
 
 		String Env = storage.getProperty("Env");
 		System.out.println("Env " + Env);
@@ -115,7 +113,7 @@ public class FedExCILOrderCreation {
 			DataFormatter formatter = new DataFormatter();
 			String file = formatter.formatCellValue(sh1.getRow(i).getCell(0));
 			// String TFolder=".//TestFiles//";
-			String TFileFolder = System.getProperty("user.dir")+"\\src\\main\\resources\\TestFiles\\";
+			String TFileFolder = System.getProperty("user.dir") + "\\src\\main\\resources\\TestFiles\\";
 			driver.findElement(By.id("MainContent_ctrlfileupload")).sendKeys(TFileFolder + file + ".txt");
 			Thread.sleep(1000);
 			driver.findElement(By.id("MainContent_btnProcess")).click();
@@ -175,8 +173,9 @@ public class FedExCILOrderCreation {
 
 		try {
 			//
-			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com", subject,
-					msg.toString(), File);
+			Email.sendMail(
+					"ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com, saurabh.jain@samyak.com, himanshu.dholakia@samyak.com",
+					subject, msg.toString(), File);
 		} catch (Exception ex) {
 			Logger.getLogger(FedExCILOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}
