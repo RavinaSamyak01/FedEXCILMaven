@@ -59,7 +59,10 @@ public class FedExCILOrderCreation {
 		options.addArguments("--proxy-bypass-list=*");
 		options.addArguments("--disable-extensions");
 		options.addArguments("--no-sandbox");
-		String downloadFilepath = System.getProperty("user.dir") + "\\src\\main\\resources\\Downloads";
+		options.addArguments("enable-automation");
+			options.addArguments("--dns-prefetch-disable");
+			options.addArguments("--disable-gpu");
+			String downloadFilepath = System.getProperty("user.dir") + "\\src\\main\\resources\\Downloads";
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("profile.default_content_settings.popups", 0);
 		chromePrefs.put("download.prompt_for_download", "false");
@@ -173,8 +176,7 @@ public class FedExCILOrderCreation {
 
 		try {
 			//
-			Email.sendMail(
-					"ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com, saurabh.jain@samyak.com, himanshu.dholakia@samyak.com",
+			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com,saurabh.jain@samyak.com",
 					subject, msg.toString(), File);
 		} catch (Exception ex) {
 			Logger.getLogger(FedExCILOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
