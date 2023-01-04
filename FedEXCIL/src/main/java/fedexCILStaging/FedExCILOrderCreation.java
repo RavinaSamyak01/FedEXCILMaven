@@ -42,9 +42,11 @@ public class FedExCILOrderCreation {
 	static StringBuilder msg = new StringBuilder();
 	static String jobid;
 	static double OrderCreationTime;
+	String EmailID = storage.getProperty("MainEmailAddress");
 
 	@BeforeMethod
 	public void login() throws InterruptedException, IOException {
+		System.out.println("MainEmailAddress " + EmailID);
 		storage = new Properties();
 		FileInputStream fi = new FileInputStream(".\\src\\main\\resources\\config.properties");
 		storage.load(fi);
@@ -60,9 +62,9 @@ public class FedExCILOrderCreation {
 		options.addArguments("--disable-extensions");
 		options.addArguments("--no-sandbox");
 		options.addArguments("enable-automation");
-			options.addArguments("--dns-prefetch-disable");
-			options.addArguments("--disable-gpu");
-			String downloadFilepath = System.getProperty("user.dir") + "\\src\\main\\resources\\Downloads";
+		options.addArguments("--dns-prefetch-disable");
+		options.addArguments("--disable-gpu");
+		String downloadFilepath = System.getProperty("user.dir") + "\\src\\main\\resources\\Downloads";
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("profile.default_content_settings.popups", 0);
 		chromePrefs.put("download.prompt_for_download", "false");
@@ -176,8 +178,7 @@ public class FedExCILOrderCreation {
 
 		try {
 			//
-			Email.sendMail("ravina.prajapati@samyak.com,asharma@samyak.com,parth.doshi@samyak.com,saurabh.jain@samyak.com",
-					subject, msg.toString(), File);
+			Email.sendMail(EmailID, subject, msg.toString(), File);
 		} catch (Exception ex) {
 			Logger.getLogger(FedExCILOrderCreation.class.getName()).log(Level.SEVERE, null, ex);
 		}

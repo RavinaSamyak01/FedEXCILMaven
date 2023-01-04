@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-01-02T13:03:42 IST" name="FedExCILSuite" finished-at="2023-01-02T13:05:10 IST" duration-ms="88356">
+    <groups>
+    </groups>
+    <test started-at="2023-01-02T13:03:42 IST" name="FedExCILOrderCreation" finished-at="2023-01-02T13:05:10 IST" duration-ms="88356">
+      <class name="fedexCILStaging.FedExCILOrderCreation">
+        <test-method is-config="true" signature="login()[pri:0, instance:fedexCILStaging.FedExCILOrderCreation@593aaf41]" started-at="2023-01-02T13:03:42 IST" name="login" finished-at="2023-01-02T13:03:59 IST" duration-ms="17156" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method signature="fedEXCILOrder()[pri:0, instance:fedexCILStaging.FedExCILOrderCreation@593aaf41]" started-at="2023-01-02T13:03:59 IST" name="fedEXCILOrder" finished-at="2023-01-02T13:05:10 IST" duration-ms="71140" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fedEXCILOrder -->
+        <test-method is-config="true" signature="Complete()[pri:0, instance:fedexCILStaging.FedExCILOrderCreation@593aaf41]" started-at="2023-01-02T13:05:10 IST" name="Complete" finished-at="2023-01-02T13:05:10 IST" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Complete -->
+        <test-method is-config="true" signature="SendEmail()[pri:0, instance:fedexCILStaging.FedExCILOrderCreation@593aaf41]" started-at="2023-01-02T13:05:10 IST" name="SendEmail" finished-at="2023-01-02T13:05:12 IST" duration-ms="1611" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- SendEmail -->
+      </class> <!-- fedexCILStaging.FedExCILOrderCreation -->
+    </test> <!-- FedExCILOrderCreation -->
+  </suite> <!-- FedExCILSuite -->
+</testng-results>

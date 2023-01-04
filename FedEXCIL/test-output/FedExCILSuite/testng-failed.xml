@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [FedExCILSuite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="FedExCILOrderCreation(failed)">
+    <classes>
+      <class name="fedexCILStaging.FedExCILOrderCreation">
+        <methods>
+          <include name="login"/>
+          <include name="SendEmail"/>
+          <include name="fedEXCILOrder"/>
+          <include name="Complete"/>
+        </methods>
+      </class> <!-- fedexCILStaging.FedExCILOrderCreation -->
+    </classes>
+  </test> <!-- FedExCILOrderCreation(failed) -->
+</suite> <!-- Failed suite [FedExCILSuite] -->
