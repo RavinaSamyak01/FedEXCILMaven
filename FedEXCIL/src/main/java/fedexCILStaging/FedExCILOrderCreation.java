@@ -32,6 +32,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import java.util.ResourceBundle;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -42,7 +43,8 @@ public class FedExCILOrderCreation {
 	static StringBuilder msg = new StringBuilder();
 	static String jobid;
 	static double OrderCreationTime;
-	String EmailID = storage.getProperty("MainEmailAddress");
+	public static ResourceBundle rb = ResourceBundle.getBundle("config");
+	public static String EmailID = rb.getString("MainEmailAddress");
 
 	@BeforeMethod
 	public void login() throws InterruptedException, IOException {
